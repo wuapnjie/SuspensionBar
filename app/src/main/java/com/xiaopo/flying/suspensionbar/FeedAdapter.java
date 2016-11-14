@@ -69,7 +69,7 @@ public class FeedAdapter extends RecyclerView.Adapter<FeedAdapter.FeedHolder> {
 
     @Override
     public int getItemCount() {
-        return 10;
+        return 100;
     }
 
     public static class FeedHolder extends RecyclerView.ViewHolder {

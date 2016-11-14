@@ -4,7 +4,6 @@ import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
@@ -49,7 +48,13 @@ public class MainActivity extends AppCompatActivity {
             public void onScrolled(RecyclerView recyclerView, int dx, int dy) {
                 super.onScrolled(recyclerView, dx, dy);
                 View view = linearLayoutManager.findViewByPosition(mCurrentPosition + 1);
-                if (view == null) return;
+                if (view == null) {
+                    mCurrentPosition = linearLayoutManager.findFirstVisibleItemPosition();
+                    mSuspensionBar.setY(0);
+
+                    updateSuspensionBar();
+                    return;
+                }
                 if (view.getTop() <= mSuspensionHeight) {
                     mSuspensionBar.setY(-(mSuspensionHeight - view.getTop()));
                 } else {
@@ -64,6 +69,8 @@ public class MainActivity extends AppCompatActivity {
                 }
             }
         });
+
+        updateSuspensionBar();
     }
 
     private void updateSuspensionBar() {
