@@ -48,17 +48,12 @@ public class MainActivity extends AppCompatActivity {
             public void onScrolled(RecyclerView recyclerView, int dx, int dy) {
                 super.onScrolled(recyclerView, dx, dy);
                 View view = linearLayoutManager.findViewByPosition(mCurrentPosition + 1);
-                if (view == null) {
-                    mCurrentPosition = linearLayoutManager.findFirstVisibleItemPosition();
-                    mSuspensionBar.setY(0);
-
-                    updateSuspensionBar();
-                    return;
-                }
-                if (view.getTop() <= mSuspensionHeight) {
-                    mSuspensionBar.setY(-(mSuspensionHeight - view.getTop()));
-                } else {
-                    mSuspensionBar.setY(0);
+                if (view != null) {
+                    if (view.getTop() <= mSuspensionHeight) {
+                        mSuspensionBar.setY(-(mSuspensionHeight - view.getTop()));
+                    } else {
+                        mSuspensionBar.setY(0);
+                    }
                 }
 
                 if (mCurrentPosition != linearLayoutManager.findFirstVisibleItemPosition()) {
