@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/suspension_bar"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@android:color/white">
+
+    <TextView
+        android:id="@+id/tv_time"
+        android:layout_width="wrap_content"
+        android:layout_height="44dp"
+        android:layout_marginLeft="8dp"
+        android:layout_toRightOf="@id/iv_avatar"
+        android:gravity="center_vertical"
+        android:text="@string/snowbean"
+        android:textSize="12sp" />
+</RelativeLayout>
