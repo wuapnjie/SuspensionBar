@@ -6,6 +6,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.ImageView;
@@ -23,7 +24,8 @@ public class MainActivity extends AppCompatActivity {
 
   private int mSuspensionHeight;
 
-  @Override protected void onCreate(Bundle savedInstanceState) {
+  @Override
+  protected void onCreate(Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
     setContentView(R.layout.activity_main);
 
@@ -34,7 +36,8 @@ public class MainActivity extends AppCompatActivity {
     Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
     toolbar.inflateMenu(R.menu.menu_main);
     toolbar.setOnMenuItemClickListener(new Toolbar.OnMenuItemClickListener() {
-      @Override public boolean onMenuItemClick(MenuItem item) {
+      @Override
+      public boolean onMenuItemClick(MenuItem item) {
         if (item.getItemId() == R.id.item_jump) {
           Intent intent = new Intent(MainActivity.this, MultiActivity.class);
           startActivity(intent);
@@ -52,12 +55,14 @@ public class MainActivity extends AppCompatActivity {
     mFeedList.setHasFixedSize(true);
 
     mFeedList.addOnScrollListener(new RecyclerView.OnScrollListener() {
-      @Override public void onScrollStateChanged(RecyclerView recyclerView, int newState) {
+      @Override
+      public void onScrollStateChanged(RecyclerView recyclerView, int newState) {
         super.onScrollStateChanged(recyclerView, newState);
         mSuspensionHeight = mSuspensionBar.getHeight();
       }
 
-      @Override public void onScrolled(RecyclerView recyclerView, int dx, int dy) {
+      @Override
+      public void onScrolled(RecyclerView recyclerView, int dx, int dy) {
         super.onScrolled(recyclerView, dx, dy);
         View view = linearLayoutManager.findViewByPosition(mCurrentPosition + 1);
         if (view != null) {
@@ -70,9 +75,9 @@ public class MainActivity extends AppCompatActivity {
 
         if (mCurrentPosition != linearLayoutManager.findFirstVisibleItemPosition()) {
           mCurrentPosition = linearLayoutManager.findFirstVisibleItemPosition();
-          mSuspensionBar.setY(0);
 
           updateSuspensionBar();
+          mSuspensionBar.setY(0);
         }
       }
     });
@@ -81,6 +86,7 @@ public class MainActivity extends AppCompatActivity {
   }
 
   private void updateSuspensionBar() {
+    Log.d("HHHH", "updateSuspensionBar: " + mCurrentPosition);
     Picasso.with(MainActivity.this)
         .load(getAvatarResId(mCurrentPosition))
         .centerInside()
